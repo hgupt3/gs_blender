@@ -1,0 +1,21 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# OS files
+.DS_Store
+
+# Rendered outputs and data
+renders/
+**/dmaps/
+**/norms/
+*.npy
+
+# Logs
+nohup.out
+
+
