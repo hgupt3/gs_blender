@@ -75,8 +75,13 @@ python post_process.py
 This creates `renders/sensor_XXXX/{dmaps,norms}` PNGs from `raw_data/*.npy`.
 
 4) View (optional)
-- `python viewers/render.py` — 3D scatter preview of a depth map + sample mosaics
+- `python viewers/render.py` — 3D scatter preview of a depth map + samples
 - `python viewers/sensor.py` — Per-sensor image gallery
+
+### Open in your browser
+
+- Render viewer: `http://127.0.0.1:8050`
+- Sensor gallery: `http://127.0.0.1:8060`
 
 ### Tips and troubleshooting
 

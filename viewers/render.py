@@ -103,4 +103,4 @@ def update_graph(next_clicks, back_click):
     return fig, image_components
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)

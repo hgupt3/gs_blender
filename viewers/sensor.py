@@ -60,4 +60,4 @@ def update_graph(next_clicks, back_click):
     return image_components
 
 if __name__ == '__main__':
-    app.run_server(port=8060, debug=True)
+    app.run(port=8060, debug=True)

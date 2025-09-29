@@ -2,9 +2,9 @@ CONTINUE = True
 
 # sampling config
 
-NUM_SENSORS = 100
-NUM_CALIBRATION = 9
-NUM_OBJ_SAMPLES = 10000
+NUM_SENSORS = 3
+NUM_CALIBRATION = 3
+NUM_OBJ_SAMPLES = 4
 
 OBJ_SIZE_MIN = 0.01
 OBJ_SIZE_MAX = 0.05
@@ -363,12 +363,27 @@ if __name__ == '__main__':
             sensors.append(create_sensor(write_dir=sensor_txt_dir))
     
     else: 
-        sensor_dirs = [sensor_dir for sensor_dir in os.listdir(render_dir) if 'sensor' in sensor_dir]
-        sensor_dirs.sort()
+        # if it does exist
+        if os.path.exists(render_dir):
+            sensor_dirs = [sensor_dir for sensor_dir in os.listdir(render_dir) if 'sensor' in sensor_dir]
+            sensor_dirs.sort()
+            for sensor_dir in sensor_dirs:
+                sensor_txt_dir = os.path.join(render_dir, sensor_dir, 'parameters.txt')
+                sensors.append(create_sensor(read_dir=sensor_txt_dir))
+        else: 
+            os.mkdir(render_dir)
+            # generate different sensors and paths
+            
+            for idx in range(NUM_SENSORS):
+                idx_formatted = '{0:04}'.format(idx)
+                sensor_dir = os.path.join(render_dir, f'sensor_{idx_formatted}')
+                os.mkdir(os.path.join(sensor_dir))
+                os.mkdir(os.path.join(sensor_dir, 'calibration'))
+                os.mkdir(os.path.join(sensor_dir, 'samples'))
+                os.mkdir(os.path.join(sensor_dir, 'raw_data'))
 
-        for sensor_dir in sensor_dirs:
-            sensor_txt_dir = os.path.join(render_dir, sensor_dir, 'parameters.txt')
-            sensors.append(create_sensor(read_dir=sensor_txt_dir))
+                sensor_txt_dir = os.path.join(sensor_dir, 'parameters.txt')
+                sensors.append(create_sensor(write_dir=sensor_txt_dir))
 
     # generate calibration for all sensors
     calibration_objects = ['IndenterSurface', 'Cube']
@@ -484,6 +499,15 @@ if __name__ == '__main__':
         bpy.ops.object.select_all(action='DESELECT')
         bpy.data.objects[obj].select_set(True)
         bpy.ops.object.delete() 
+
+    # ensure Blender exits cleanly with code 0 on success
+    import bpy.app
+    import sys as _sys
+    # Use Blender operator to quit; if unavailable, fall back to sys exit
+    try:
+        bpy.ops.wm.quit_blender()
+    except Exception:
+        _sys.exit(0)
 
 #sensor = create_sensor()
 #sensor.apply()
