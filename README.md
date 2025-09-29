@@ -10,7 +10,7 @@ Generate synthetic GelSight tactile images and depth maps from 3D meshes using B
 
 ### Setup (post-process + viewers)
 
-Create a virtual environment (recommended) and install dependencies:
+Create a virtual environment and install dependencies:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
