@@ -4,7 +4,7 @@ Generate synthetic GelSight tactile images and depth maps from 3D meshes using B
 
 ### Prerequisites
 
-- Blender 3.x (GUI; i was not able to get background rendering to work for the depth maps)
+- Blender 4.x (GUI; i was not able to get background rendering to work for the depth maps)
 - Linux recommended (tested on Ubuntu)
 - Python 3.10+ for post-processing and viewers
 
